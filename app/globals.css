@@ -1,0 +1,381 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile-first responsive utilities */
+@layer utilities {
+  .mobile-container {
+    @apply w-full max-w-full px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-text {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .mobile-heading {
+    @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl;
+  }
+  
+  .mobile-button {
+    @apply w-full sm:w-auto px-4 py-3 sm:px-6 sm:py-3 text-sm sm:text-base;
+  }
+  
+  .mobile-card {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+  
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+  
+  .mobile-flex {
+    @apply flex flex-col sm:flex-row;
+  }
+  
+  .mobile-gap {
+    @apply gap-3 sm:gap-4 lg:gap-6;
+  }
+  
+  .mobile-margin {
+    @apply mb-4 sm:mb-6 lg:mb-8;
+  }
+  
+  .mobile-padding {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+}
+
+/* Desktop-specific utilities */
+@layer utilities {
+  .desktop-container {
+    @apply max-w-7xl mx-auto px-8 lg:px-12 xl:px-16;
+  }
+  
+  .desktop-text {
+    @apply text-base lg:text-lg xl:text-xl;
+  }
+  
+  .desktop-heading {
+    @apply text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl;
+  }
+  
+  .desktop-button {
+    @apply px-8 py-4 lg:px-10 lg:py-5 text-lg lg:text-xl;
+  }
+  
+  .desktop-card {
+    @apply p-8 lg:p-10 xl:p-12;
+  }
+  
+  .desktop-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5;
+  }
+  
+  .desktop-gap {
+    @apply gap-6 lg:gap-8 xl:gap-10;
+  }
+  
+  .desktop-margin {
+    @apply mb-8 lg:mb-10 xl:mb-12;
+  }
+  
+  .desktop-padding {
+    @apply p-8 lg:p-10 xl:p-12;
+  }
+}
+
+/* Touch-friendly button styles */
+@layer components {
+  .btn-primary {
+    @apply mobile-button bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900;
+  }
+  
+  .btn-secondary {
+    @apply mobile-button bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-gray-900;
+  }
+  
+  .btn-ghost {
+    @apply mobile-button bg-gray-700/50 text-gray-300 font-semibold rounded-xl hover:bg-gray-600/50 transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-900;
+  }
+  
+  .card-mobile {
+    @apply mobile-card bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300 transform hover:scale-105 shadow-xl;
+  }
+  
+  .input-mobile {
+    @apply w-full px-4 py-3 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200 text-base;
+  }
+  
+  .modal-mobile {
+    @apply fixed inset-0 bg-gray-900/95 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in;
+  }
+  
+  .modal-content-mobile {
+    @apply mobile-padding bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl sm:rounded-3xl max-w-full w-full max-h-[90vh] overflow-y-auto border border-purple-500/20 shadow-2xl animate-scale-in;
+  }
+}
+
+/* Desktop-specific components */
+@layer components {
+  .btn-primary-desktop {
+    @apply desktop-button bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-2xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/25 active:scale-95 focus:outline-none focus:ring-4 focus:ring-cyan-400 focus:ring-offset-4 focus:ring-offset-gray-900;
+  }
+  
+  .btn-secondary-desktop {
+    @apply desktop-button bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold rounded-2xl hover:from-purple-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-400 focus:ring-offset-4 focus:ring-offset-gray-900;
+  }
+  
+  .card-desktop {
+    @apply desktop-card bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl border border-gray-700/50 hover:border-purple-500/30 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl shadow-xl;
+  }
+  
+  .input-desktop {
+    @apply w-full px-6 py-4 bg-gray-700/50 border border-gray-600/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-500/20 transition-all duration-300 text-lg;
+  }
+  
+  .modal-desktop {
+    @apply fixed inset-0 bg-gray-900/95 backdrop-blur-md z-50 flex items-center justify-center p-8 animate-fade-in;
+  }
+  
+  .modal-content-desktop {
+    @apply desktop-padding bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-purple-500/20 shadow-2xl animate-scale-in;
+  }
+}
+
+/* Hide Next.js dev overlay (bottom left 'N' icon) in development */
+#__next-route-announcer,
+[data-nextjs-dev-overlay] {
+  display: none !important;
+}
+
+/* Custom scrollbar styles for chat */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+/* Ensure background stays purple during scroll */
+.overflow-y-auto {
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.6) 0%, rgba(17, 24, 39, 0.6) 100%);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  .mobile-optimized {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  /* Reduce animations on low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Optimize for touch devices */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve text readability on small screens */
+  p, span, div {
+    line-height: 1.5;
+  }
+  
+  /* Optimize images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 480px) {
+  .low-end-optimized {
+    will-change: auto;
+    transform: none;
+  }
+  
+  .low-end-optimized * {
+    will-change: auto;
+  }
+}
+
+/* Desktop-specific optimizations */
+@media (min-width: 1024px) {
+  .desktop-optimized {
+    /* Enable hardware acceleration for desktop */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+  }
+  
+  /* Enhanced hover effects for desktop */
+  .desktop-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .desktop-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* High-quality backdrop blur for desktop */
+  .desktop-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  /* Custom scrollbar for desktop */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(31, 41, 55, 0.3);
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    border-radius: 6px;
+    border: 2px solid rgba(31, 41, 55, 0.3);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0891b2, #2563eb);
+  }
+  
+  /* Enhanced animations for desktop */
+  .desktop-animate {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* GPU acceleration for desktop */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* High-resolution images for desktop */
+  .desktop-hi-res {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* High-end desktop optimizations */
+@media (min-width: 1440px) {
+  .high-end-desktop {
+    /* Ultra-smooth animations for high-end desktops */
+    animation-duration: 0.3s;
+    transition-duration: 0.2s;
+  }
+  
+  /* Enhanced visual effects for high-end desktops */
+  .high-end-effects {
+    filter: contrast(1.1) saturate(1.1);
+  }
+  
+  /* Larger touch targets for high-end desktops */
+  .high-end-button {
+    min-height: 56px;
+    min-width: 56px;
+  }
+}
+
+/* Loading states */
+.loading-skeleton {
+  @apply animate-pulse bg-gray-700/50 rounded;
+}
+
+.loading-spinner {
+  @apply animate-spin rounded-full border-2 border-gray-600 border-t-cyan-400;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in {
+    animation: none;
+  }
+}
+
+/* Focus styles for better accessibility */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-cyan-400 ring-offset-2 ring-offset-gray-900;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-mobile {
+    @apply border-2 border-white/20;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    @apply border-2 border-white/20;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .card-mobile,
+  .card-desktop {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}

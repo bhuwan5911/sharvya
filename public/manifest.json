@@ -1,0 +1,12 @@
+{
+  "name": "Sharvya",
+  "short_name": "Sharvya",
+  "description": "Voice-First Learning Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a40",
+  "theme_color": "#1a1a40",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en"
+} 

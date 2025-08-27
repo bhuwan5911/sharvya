@@ -1,0 +1,12 @@
+:root {
+  --font-pacifico: 'Pacifico', cursive;
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-inter);
+}
+
+.font-pacifico {
+  font-family: var(--font-pacifico);
+} 

@@ -1,0 +1,185 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  profile     Profile?
+  quizzes     Quiz[]
+  voiceRecords VoiceRecord[]
+  achievements Achievement[]
+  badges       Badge[]
+  resumes     Resume[]
+  chatParticipants ChatParticipant[]
+  chatMessages     ChatMessage[]
+}
+
+model Quiz {
+  id        Int      @id @default(autoincrement())
+  question  String
+  answer    String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  // New fields for real quiz data
+  category   String
+  difficulty String
+  language   String
+  options    String   // JSON string of options array
+  type       String
+  points     Int
+  audioUrl   String?
+  // Accuracy tracking
+  correctAnswers Int   @default(0)
+  totalAnswers   Int   @default(0)
+}
+
+model VoiceRecord {
+  id        Int      @id @default(autoincrement())
+  url       String   // Supabase Storage file URL
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Achievement {
+  id         Int      @id @default(autoincrement())
+  title      String
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  achievedAt DateTime @default(now())
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  phone     String?
+  location  String?
+  languages String   // JSON string of languages array
+  age       Int?
+  education String?
+  interests String   // JSON string of interests array
+  goals     String?
+  expertise String?
+  experience String?
+  bio       String?
+  availability String?
+  avatarUrl String?
+  userId    Int     @unique
+  user      User    @relation(fields: [userId], references: [id])
+}
+
+model Badge {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  description String
+  icon        String
+  color       String
+  type        String   // 'quiz', 'level', 'streak', 'category', 'accuracy'
+  earnedAt    DateTime @default(now())
+  metadata    String?  // Store additional data like score, category, etc. as JSON string
+}
+
+model Resume {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  
+  // Personal Information
+  fullName    String
+  title       String
+  email       String
+  phone       String
+  location    String
+  
+  // Education
+  degree      String
+  field       String
+  university  String
+  graduationYear String
+  
+    // Skills
+  skills      String   // JSON string of skills array
+
+  // Achievements
+  achievements String   // JSON string of achievements array
+
+  // Projects
+  projects    String   // JSON string of projects array
+
+  // Additional Information
+  certifications String   // JSON string of certifications array
+  
+  // Metadata
+  isComplete  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model ChatSession {
+  id          Int      @id @default(autoincrement())
+  name        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  participants ChatParticipant[]
+  messages     ChatMessage[]
+}
+
+model ChatParticipant {
+  id            Int         @id @default(autoincrement())
+  sessionId     Int
+  userId        Int
+  role          String      // 'student' or 'mentor'
+  language      String      // preferred language code
+  joinedAt      DateTime    @default(now())
+  
+  // Relations
+  session       ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([sessionId, userId])
+  @@index([sessionId])
+  @@index([userId])
+}
+
+model ChatMessage {
+  id                Int         @id @default(autoincrement())
+  sessionId         Int
+  senderId          Int
+  originalText      String
+  translatedText    String
+  originalLanguage  String
+  translatedLanguage String
+  isVoice           Boolean     @default(false)
+  createdAt         DateTime    @default(now())
+  
+  // Relations
+  session           ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sender            User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  
+  @@index([sessionId])
+  @@index([senderId])
+  @@index([createdAt])
+}
